@@ -7,6 +7,14 @@ public class MonoFluxTest {
 
     @Test
     public void monoFluxTest() {
+        Mono<?> monoString = Mono.just("Webflux Demo").log();
+        monoString.subscribe(System.out::println, (error) -> {
+            System.out.println(error.getMessage());
+        });
+    }
+
+    @Test
+    public void monoFluxErrorTest() {
         Mono<?> monoString = Mono.just("Webflux Demo")
                 .then(Mono.error(new RuntimeException("Exception occur")))
                 .log();
